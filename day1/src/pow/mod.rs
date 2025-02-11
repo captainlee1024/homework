@@ -1,6 +1,6 @@
 use anyhow::{Ok, Result};
-use sha2::{Digest, Sha256};
 use hex;
+use sha2::{Digest, Sha256};
 
 #[derive(Debug)]
 pub struct PowResult {
@@ -18,7 +18,7 @@ pub fn pow(user_name: String, difficulty: String) -> Result<PowResult> {
 
         let input_str = user_name.clone() + &nonce.to_string();
         hasher.update(input_str.as_bytes());
-    
+
         let result = hasher.finalize();
         let hash = hex::encode(result);
 
@@ -34,10 +34,9 @@ pub fn pow(user_name: String, difficulty: String) -> Result<PowResult> {
     }
 }
 
-
 mod tests {
-    use std::time;
     use super::*;
+    use std::time;
 
     // cargo test test_pow_difficulty4 -- --nocapture
     // output:
